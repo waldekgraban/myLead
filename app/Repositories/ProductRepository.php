@@ -3,9 +3,17 @@
 namespace App\Repositories;
 
 use App\Product;
+use App\Services\PriceServiceInterface;
 
 class ProductRepository implements ProductServiceInterface
 {
+    private PriceServiceInterface $priceService;
+
+    public function __construct(PriceServiceInterface $priceService)
+    {
+        $this->priceService = $priceService;
+    }
+
     public function getAllProducts(): Collection
     {
         return Product::get();
@@ -22,21 +30,29 @@ class ProductRepository implements ProductServiceInterface
         $product->name        = $request->name;
         $product->description = $request->description;
         $product->save();
+    }
 
+    private function prepareProductPrices($price)
+    {
+        $price = $this->priceService->checkPrice($price);
     }
 
     public function updateProduct(Request $request, int $id): bool
     {
         $product = Product::find($id);
 
-        $product->name   = is_null($request->name) ? $product->name : $product->name;
-        $product->author = is_null($request->author) ? $product->author : $product->author;
-        $product->save();
+        if ($product) {
+            $product->name        = is_null($request->name) ? $product->name : $product->name;
+            $product->description = is_null($request->description) ? $product->description : $product->description;
+            $product->save();
+        }
     }
 
     public function deleteProduct(int $id): bool
     {
         $product = Product::find($id);
-        if($product) $product->delete();
+        if ($product) {
+            $product->delete();
+        }
     }
 }

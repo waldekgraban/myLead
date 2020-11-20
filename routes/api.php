@@ -22,3 +22,5 @@ Route::get('products/{id}', 'Api\ProductController@getProduct');
 Route::post('products', 'Api\ProductController@createProduct');
 Route::put('products/{id}', 'Api\ProductController@updateProduct');
 Route::delete('products/{id}','Api\ProductController@deleteProduct');
+
+// Route::apiResource('products', 'ProductController');

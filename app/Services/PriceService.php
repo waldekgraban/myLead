@@ -23,4 +23,9 @@ class PriceService implements PriceServiceInterface
     {
         return $this->priceRepository->createPrice($request);
     }
+
+    public function checkPrice(float $price): Price
+    {
+        //czy cena już istnieje w bazie, jeśli tak - pobierz, jeśli zapisz i pobierz
+    }
 }
