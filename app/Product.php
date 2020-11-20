@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Price;
+// use App\Price;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -16,6 +16,6 @@ class Product extends Model
 
     public function prices()
     {
-        return $this->hasMany(Price::class);
+        return $this->belongsToMany(Price::class, 'price_product');
     }
 }
