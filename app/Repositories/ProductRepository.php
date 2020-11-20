@@ -37,6 +37,6 @@ class ProductRepository implements ProductServiceInterface
     public function deleteProduct(int $id): bool
     {
         $product = Product::find($id);
-        if($product) return $product->delete();
+        if($product) $product->delete();
     }
 }
