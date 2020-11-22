@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
+use App\Product;
 
 interface ProductRepositoryInterface
 {

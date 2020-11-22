@@ -4,11 +4,12 @@ namespace App\Services;
 
 use App\Product;
 use App\Repositories\ProductRepositoryInterface;
+use App\Services\ProductServiceInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 
 
-class ProductService implements ProductServiceInterface
+class ProductService implements ProductServiceInterface 
 {
     private ProductRepositoryInterface $productRepository;
 

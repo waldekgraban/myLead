@@ -8,7 +8,7 @@ use App\Services\ProductServiceInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 
-class ProductRepository implements ProductServiceInterface
+class ProductRepository implements ProductRepositoryInterface
 {
     private PriceServiceInterface $priceService;
 
