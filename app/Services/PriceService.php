@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\PriceRepositoryInterface;
 use App\Price;
+use Illuminate\Http\Request;
 
 class PriceService implements PriceServiceInterface
 {

@@ -4,6 +4,9 @@ namespace App\Repositories;
 
 use App\Product;
 use App\Services\PriceServiceInterface;
+use App\Services\ProductServiceInterface;
+use Illuminate\Support\Collection;
+use Illuminate\Http\Request;
 
 class ProductRepository implements ProductServiceInterface
 {

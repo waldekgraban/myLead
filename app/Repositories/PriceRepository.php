@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Price;
+use Illuminate\Http\Request;
 
 class PriceRepository implements PriceRepositoryInterface
 {

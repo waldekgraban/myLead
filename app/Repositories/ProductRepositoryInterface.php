@@ -2,6 +2,9 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Collection;
+use Illuminate\Http\Request;
+
 interface ProductRepositoryInterface
 {
     public function getAllProducts(): Collection;

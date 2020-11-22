@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Price;
+use Illuminate\Http\Request;
 
 interface PriceServiceInterface
 {

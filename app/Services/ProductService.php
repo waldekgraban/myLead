@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Product;
 use App\Repositories\ProductRepositoryInterface;
+use Illuminate\Support\Collection;
+use Illuminate\Http\Request;
 
 
 class ProductService implements ProductServiceInterface
