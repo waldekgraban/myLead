@@ -42,7 +42,7 @@ class ProductController extends Controller
     {
         $product = $this->productService->getProduct($id);
 
-        if($product->exists()) {
+        if($product != null) {
             return new JsonResponse(
                 $product->toJson(JSON_PRETTY_PRINT),
                 Response::HTTP_OK
@@ -63,6 +63,7 @@ class ProductController extends Controller
      */
     public function createProduct(Request $request): JsonResponse
     {
+        dd($request);
         $product = $this->productService->createProduct($request);
 
         return new JsonResponse([

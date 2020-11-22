@@ -17,10 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('products', 'Api\ProductController@getAllProducts');
-Route::get('products/{id}', 'Api\ProductController@getProduct');
-Route::post('products', 'Api\ProductController@createProduct');
-Route::put('products/{id}', 'Api\ProductController@updateProduct');
-Route::delete('products/{id}','Api\ProductController@deleteProduct');
+Route::group(['prefix'=>'products','as'=>'products.'], function(){
+    Route::get('all', 'Api\ProductController@getAllProducts');
+    Route::get('show/{id}', 'Api\ProductController@getProduct');
+    Route::post('create', 'Api\ProductController@createProduct');
+    Route::put('update/{id}', 'Api\ProductController@updateProduct');
+    Route::delete('delete/{id}','Api\ProductController@deleteProduct');
+});
 
 // Route::apiResource('products', 'ProductController');

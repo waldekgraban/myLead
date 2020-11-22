@@ -22,9 +22,9 @@ class ProductRepository implements ProductRepositoryInterface
         return Product::get();
     }
 
-    public function getProduct(int $id): Product
+    public function getProduct(int $id): ?Product
     {
-        return Product::where('id', $id)->get();
+        return Product::where('id', $id)->first();
     }
 
     public function createProduct(Request $request): bool

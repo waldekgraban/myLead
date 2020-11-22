@@ -23,14 +23,14 @@ class ProductService implements ProductServiceInterface
         return $this->productRepository->getAllProducts();
     }
 
-    public function getProduct(int $id): Product
+    public function getProduct(int $id): ?Product
     {
         return $this->productRepository->getProduct($id);
     }
 
     public function createProduct(Request $request): bool
     {
-        return $this->productRepository->getProduct($id);
+        return $this->productRepository->createProduct($request);
     }
 
     public function updateProduct(Request $request, int $id): bool
