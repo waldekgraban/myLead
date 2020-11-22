@@ -6,7 +6,7 @@ use App\Price;
 
 class PriceRepository implements PriceRepositoryInterface
 {
-    public function getPrice(int $id): Price
+    public function getPrice(int $id): ?Price
     {
         return Price::where('id', $id)->get();
     }
@@ -16,5 +16,10 @@ class PriceRepository implements PriceRepositoryInterface
         $price        = new Price();
         $price->price = $request->price;
         $price->save();
+    }
+
+    public function getPriceByAmount(float $amount): ?Price
+    {
+        return Price::where('price', $amount)->get();
     }
 }
