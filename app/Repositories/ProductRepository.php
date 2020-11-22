@@ -30,11 +30,20 @@ class ProductRepository implements ProductServiceInterface
         $product->name        = $request->name;
         $product->description = $request->description;
         $product->save();
+
+        $priceIds = collect($request->prices)->map(function ($price) {
+            $productPrice = $this->prepareProductPrices($price);
+            return [
+                $productPrice->id
+            ];
+        });
+
+        $product->prices()->attach($priceIds);
     }
 
-    private function prepareProductPrices($price)
+    private function prepareProductPrices($price): Price
     {
-        $price = $this->priceService->checkPrice($price);
+        return $this->priceService->setProductPrice($price);
     }
 
     public function updateProduct(Request $request, int $id): bool
