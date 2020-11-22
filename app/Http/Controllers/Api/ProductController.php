@@ -47,9 +47,10 @@ class ProductController extends Controller
                 Response::HTTP_OK
             );
         } else {
-            return response()->json([
-                "message" => "Product not found",
-            ], 404);
+            return new JsonResponse(
+                "Product not found",
+                Response::HTTP_NOT_FOUND
+            );
         }
     }
 
