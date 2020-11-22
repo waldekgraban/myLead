@@ -16,7 +16,12 @@ class PriceService implements PriceServiceInterface
 
     public function getPrice(int $id): Price
     {
-        return $this->priceRepository->createPrice($request);
+        return $this->priceRepository->getPrice($request);
+    }
+
+    public function getPriceByAmount(float $amount): Price
+    {
+        return $this->priceRepository->getPriceByAmount($amount);
     }
 
     public function createPrice(Request $request): bool
@@ -24,8 +29,16 @@ class PriceService implements PriceServiceInterface
         return $this->priceRepository->createPrice($request);
     }
 
-    public function checkPrice(float $price): Price
+    public function setProductPrice(float $price): Price
     {
-        //czy cena już istnieje w bazie, jeśli tak - pobierz, jeśli zapisz i pobierz
+        $productPrice = $this->getPriceByAmount($price);
+
+        if(!$productPrice){
+            $this->createPrice($price);
+            return $this->checkPrice($price);
+            //rekurencja, żeby nie powtarzać dwa razy metody getPriceByAmount (zabezpieczyć jeszcze przed nieskończoną pętlą...)
+        };
+
+        return $productPrice;
     }
 }
