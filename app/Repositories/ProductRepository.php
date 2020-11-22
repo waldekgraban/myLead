@@ -31,12 +31,7 @@ class ProductRepository implements ProductServiceInterface
         $product->description = $request->description;
         $product->save();
 
-        $priceIds = collect($request->prices)->map(function ($price) {
-            $productPrice = $this->prepareProductPrices($price);
-            return [
-                $productPrice->id
-            ];
-        });
+        $priceIds = $this->preparePriceIds($request);
 
         $product->prices()->attach($priceIds);
     }
@@ -46,14 +41,28 @@ class ProductRepository implements ProductServiceInterface
         return $this->priceService->setProductPrice($price);
     }
 
+    private function preparePriceIds($request): Array
+    {
+        return collect($request->prices)->map(function ($price) {
+            $productPrice = $this->prepareProductPrices($price);
+            return [
+                $productPrice->id
+            ];
+        });
+    }
+
     public function updateProduct(Request $request, int $id): bool
     {
         $product = Product::find($id);
 
         if ($product) {
-            $product->name        = is_null($request->name) ? $product->name : $product->name;
-            $product->description = is_null($request->description) ? $product->description : $product->description;
+            $product->name = $request->name ?? $product->name;
+            $product->description = $request->description ?? $product->description;
             $product->save();
+
+            $priceIds = $this->preparePriceIds($request);
+
+            $product->prices()->sync($priceIds);
         }
     }
 
